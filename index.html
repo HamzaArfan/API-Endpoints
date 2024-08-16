@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>End Point Testing</title>
+</head>
+<body>
+
+    <button  id ="getButton">GET REQUEST</button>
+    <button  id ="putButton">PUT REQUEST</button>
+    <button  id ="postButton">POST REQUEST</button>
+    <button  id ="deleteButton">DELETE</button>
+    
+</body>
+<script>
+//Using ajax jquery to send PUT request to update the userdetails for specific id
+$(document).ready(function(){
+    $('#putButton').click(function(event){
+        event.preventDefault();
+        $.ajax({
+        url: "api_endpoints.php",
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({id: 4, name: "Hamzaking", email: "hamza@yahoo.com", password: "23502350"}),
+        success: function(response) {
+            console.log(response);
+        },
+        error: function() {
+            console.log("Error");
+        }
+        })
+
+    })
+    //Using ajax jquery to send GET request to fetch all the userdetails present.
+    $('#getButton').click(function(event){
+        event.preventDefault();
+        $.ajax({
+            url:"api_endpoints.php",
+            type:"GET",
+            success:function(response){
+            console.log(response);
+            }
+            ,
+            error:function(){
+                console.log(error)
+            }
+        })
+    })
+    //Using ajax jquery to send POST request to input and send the new user we want to enter.
+    $('#postButton').click(function(event){
+        event.preventDefault();
+        $.ajax({
+            url:"api_endpoints.php",
+            type:"POST",
+            data:JSON.stringify({name:"hamza",email:"hamza@gmail.com",password:"23502350"}),
+            success:function(response){
+                console.log(response)
+            },
+            error:function(data){  
+            }
+        })
+    })
+    //Using ajax jquery to send Delete Reqyest to delete the user with a specific id .
+    $('#deleteButton').click(function(event){
+        event.preventDefault();
+
+        $.ajax({
+            type:"DELETE",
+            url:"api_endpoints.php",
+            data:JSON.stringify({id:"3"}),
+            success:function(response){
+                console.log(response);
+            },
+            error:function(){
+                console.log("error");
+            }
+        
+        })
+    })
+
+})
+
+
+</script>
+</html>
